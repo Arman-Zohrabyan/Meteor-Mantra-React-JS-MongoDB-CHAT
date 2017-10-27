@@ -2,7 +2,7 @@ import {createApp} from 'mantra-core';
 import initContext from './configs/context';
 
 // sass rubix lib
-//import './sass/main.scss';
+import './sass/main.scss';
 
 // modules
 import coreModule from './modules/core';

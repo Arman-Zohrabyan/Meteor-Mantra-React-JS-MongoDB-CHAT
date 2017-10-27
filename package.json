@@ -1,6 +1,5 @@
 {
-  "name": "mantra-demo",
-  "version": "0.4.1",
+  "version": "1.0.0",
   "scripts": {
     "lint": "eslint ./lib ./client ./server --ext .js",
     "lintfix": "npm run lint -- --fix",
@@ -30,10 +29,14 @@
     "style-loader": "^0.13.1"
   },
   "dependencies": {
+    "@sketchpixy/rubix": "^2.9.18",
+    "babel-runtime": "https://registry.npmjs.org/babel-runtime/-/babel-runtime-6.11.6.tgz",
     "domready": "^1.0.8",
     "mantra-core": "^1.7.0",
     "react": "^15.0.0",
+    "react-bootstrap": "^0.31.5",
     "react-dom": "^15.0.0",
+    "react-helmet": "^5.2.0",
     "react-mounter": "^1.2.0"
   },
   "private": true

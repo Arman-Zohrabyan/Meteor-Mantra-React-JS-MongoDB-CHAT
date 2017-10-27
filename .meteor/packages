@@ -22,3 +22,6 @@ check
 random
 standard-minifier-css
 standard-minifier-js
+fourseven:scss
+fortawesome:fontawesome@4.7.0
+clinical:fonts

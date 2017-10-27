@@ -1,0 +1,150 @@
+@import '../../../node_modules/@sketchpixy/rubix/sass/bootstrap/bootstrap-variables';
+
+/*
+ Here we can override default bootstrap variables -- if we really need
+*/
+
+// resources
+$mainHeaderBackground: 'https://s3.eu-central-1.amazonaws.com/ico-p1/appResources/header_bg1.jpg';
+
+// component variables:
+$button-border-radius-basic: 23px;
+
+/* default rubix colors which was hardcoded in _colors.scss.
+   By redeclare it here, we can use it also in this file.
+*/
+$white: #fff;
+$brightblue: #003BFF;
+$black: #000;
+
+// new design here:
+$lighter-ico-color: #00c1fa;
+$darker-ico-color: #6158ab;
+
+$ico-grey-color2: #e7e8ea;
+$ico-grey-color: #cbcdcc;
+$ico-lighter-dark-color: #797777;
+$ico-dark-grey-color: #666;
+$ico-darker-dark-color: #504e4e;
+$ico-text-value-color: $gray-base;
+
+$ico-twitter-color: #00aced;
+$ico-facebook-color: #3b5998;
+$ico-slack-color: #4d394b;
+
+$verified-status-logo-color: #35b084;
+$unverified-status-logo-color: #e44061;
+$verification-in-process-logo-color: #292929;
+
+$btn-horizontal-padding: 3rem;
+
+$min-layout-width: 320px;
+
+/* END -- new design here: */
+
+
+
+/* basic bootstrap scss variables (can be overwritten here, or by our custom class) */
+$img-path: '/';
+$bootstrap-sass-asset-helper: true;
+$icon-font-path: '/fonts/glyphicon/'; // only for glyphicon
+$grid-gutter-width: 30px;
+
+$font-size-base: 14px;
+$line-height-base: 1.785714289; // 25/14
+$line-height-computed: floor(($font-size-base * $line-height-base)); // ~25px
+
+$padding-base-vertical: 6px;
+$input-height-base: ($line-height-computed + ($padding-base-vertical * 2) + 1);
+
+$nav-link-padding: 4px ($line-height-computed);
+$panel-heading-padding: ($line-height-computed / 2) ($line-height-computed);
+$panel-body-padding: $line-height-computed;
+
+$navbar-height: 75px;
+$sidebar-controls-visibility: visible;
+
+$font-family-sans-serif:  'PT Sans', Helvetica, Arial, sans-serif;
+$headings-font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+
+$screen-sm-min: 540px;
+$screen-md-min: 1152px;
+$screen-lg-min: 1366px;
+
+$screen-xs-max: ($screen-sm-min - 1);
+$screen-sm-max: ($screen-md-min - 1);
+$screen-md-max: ($screen-lg-min - 1);
+
+$grid-float-breakpoint: 975px;
+
+/* todo: change these variables according to our theme */
+$primary-color: #89949B;
+$brand-primary: #428bca;
+$brand-success: #5cb85c;
+$brand-info: #5bc0de;
+$brand-warning: #f0ad4e;
+$brand-danger: #d9534f;
+
+$zindex-tooltip: 100000;
+
+$container-sm: 990px;
+$container-md: 990px;
+$container-lg: 990px;
+
+$btn-height: 30px;
+$btn-border-radius-base: 5px;
+$btn-padding-base-vertical: 2px;
+$btn-padding-base-horizontal: 15px;
+$btn-padding-large-base-vertical: 10px;
+$btn-padding-large-base-horizontal: 25px;
+
+$btn-font-size: 12px;
+$btn-font-weight: bold;
+$btn-font-size-small: 10px;
+$btn-font-size-xsmall: 8px;
+
+$btn-link-color: #89949B;
+$btn-default-color: #B4B7B9;
+$btn-primary-color: $brand-primary;
+$btn-success-color: $brand-success;
+$btn-info-color: $brand-info;
+$btn-warning-color: $brand-warning;
+$btn-danger-color: $brand-danger;
+
+$dropdown-link-color: rgb(137, 148, 155);
+$dropdown-link-hover-bg: rgba(180, 183, 185, 0.05);
+
+$link-color: $darker-ico-color;
+$link-hover-color: $darker-ico-color;
+$link-hover-decoration: none;
+
+$nav-link-color: $white;
+$nav-tabs-border-color: transparent;
+$nav-disabled-link-color: #777777;
+$nav-link-hover-bg: transparent;
+$nav-tabs-link-hover-border-color: transparent;
+
+$navbar-default-bg: #ddd;
+$breadcrumb-bg: #fff;
+
+
+/* next custom variables */
+
+$body-background-color: #eff4f7;
+$content-elem-bg-color: #fff;
+
+$ico-box-background-color: $white;
+$ico-box-border: #dddddd;
+
+
+// old variables, todo: delete
+$main-theme-green: #1C8B71;
+$main-theme-darkblue: #4A90E2;
+$main-theme-pinkorange: #e45f56;
+$main-theme-pinkorange2: #eb8982;
+
+
+$hidden-link-color: $gray-dark;
+$btn-extra-size-font-size: 22px;
+
+$user-menu-dropdown-min-height: 50px;

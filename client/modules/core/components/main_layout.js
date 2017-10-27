@@ -4,12 +4,12 @@ import Navigation from './navigation';
 const Layout = ({content = () => null }) => (
   <div>
     <header>
-    <h1>Mantra Voice</h1>
-    <Navigation />
+      <h1>Mantra Voice</h1>
+      <Navigation />
     </header>
 
     <div>
-    {content()}
+      {content()}
     </div>
 
     <footer>
