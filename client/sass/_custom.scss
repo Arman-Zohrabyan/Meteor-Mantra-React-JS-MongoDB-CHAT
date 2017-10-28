@@ -1,621 +1,81 @@
-@import "./variables";
-
-
-/* helper classes */
-.cursor-pointer {
-  cursor: pointer;
-}
-
-.full-width {
-  width: 100%;
-}
-
-@mixin full-width() {
-  width: 100%;
-}
-
-.text-help {
-  border-bottom: thin dotted;
-  cursor: help;
-}
-
-.row-vertical-center {
-  display: flex;
-  align-items: center;
-}
-
-.row-all-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.flex-vertical-center {
-  display: flex;
-  align-items: center;
-}
-
-.flex-horizontal-center {
-  display: flex;
-  justify-content: center;
-}
-
-.vertical-align-middle {
-  vertical-align: middle;
-}
-
-.vertical-align-top {
-  vertical-align: top;
-}
-
-.border-bottom-1-solid {
-  border-bottom: 1px solid;
-}
-
-.margin-bottom-negative-1 {
-  margin-bottom: -1px;
-}
-
-/* layout & theme */
-html, body {
-  height: 100%;
-  background-color: $body-background-color;
-}
-
-footer {
-  color: $white;
-  min-width: $min-layout-width;
-
-  a {
-    color: $white;
-
-    &:hover, &:active, &:focus {
-      color: $white;
-    }
-  }
-
-  a.highlighted-link {
-    text-decoration: underline;
-  }
-
-  .footer-section-odd {
-    background-color: $ico-darker-dark-color;
-  }
-  .footer-section-even {
-    background-color: $ico-lighter-dark-color;
-  }
-  .footer-section-last {
-    background-color: $darker-ico-color;
-  }
-
-  .footer-social-link {
-    min-width: 82px;
-
-    border: none;
-    border-radius: $button-border-radius-basic;
-  }
-  a.twitter-link {
-    background-color: $ico-twitter-color;
-    &:hover, &:active {
-      background-color: lighten($ico-twitter-color, 10%);
-    }
-  }
-  a.facebook-link {
-    background-color: $ico-facebook-color;
-    &:hover, &:active {
-      background-color: lighten($ico-facebook-color, 10%);
-    }
-  }
-  a.slack-link {
-    background-color: $ico-slack-color;
-    &:hover, &:active {
-      background-color: lighten($ico-slack-color, 10%);
-    }
-  }
-
-  .social-icon {
-    @media (max-width: $screen-xs-max) {
-      margin-left: 0.5em;
-    }
-  }
-
-  a.footer-social-link:hover, a.footer-social-link:active {
-    @media (min-width: $screen-sm-min) {
-      .social-icon {
-        font-size: $font-size-h3;
-      }
-      .social-link-caption {
-        font-size: $font-size-h4;
-      }
-    }
-  }
-
-  .social-links-section {
-    min-height: 45px;
-  }
-  .social-links-section-wrapper {
-    min-height: 125px;
-  }
-
-  .donations-section {
-    .donation-address-text {
-      @media (max-width: $screen-xs-max) {
-        font-size: 10px;
-      }
-      @media (min-width: $screen-sm-min) {
-        font-size: $font-size-h5;
-      }
-      text-decoration: underline;
-    }
-    .donation-message-text {
-      @media (max-width: $screen-xs-max) {
-        min-height: 10rem;
-      }
-      @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-        min-height: 9rem;
-      }
-      @media (min-width: $screen-md-min) {
-        min-height: 6.5rem;
-      }
-    }
-    .crypto-logo-fill-background {
-      background-color: $white;
-      border-radius: 100%;
-    }
-  }
-}
-
-.popover {
-  max-width: 500px !important;
-}
-
-/* word wrapping for long strings*/
-h1, h2, h3, h4, h5, h6, div, span, p {
-  //noinspection CssInvalidPropertyValue
-  word-break: break-word;
-  word-wrap: break-word;
-}
-
-.word-no-wrap {
-  white-space: nowrap;
-}
-
-.content-elem-bg-color {
-  background-color: $content-elem-bg-color;
-}
-
-/*todo fix this hack - minimum container height */
-.min-height-51rem {
-  min-height: 51rem;
-}
-
-.image-uploader-preview {
-  position: absolute;
-  max-height: 100%;
-}
-
-.image-uploader-preview-wrapper {
-  position: relative;
-  min-height: 150px;
-}
-
-.btn-extra-size {
-  font-size: $btn-extra-size-font-size;
-}
-
-/* our basic design components */
-
-@mixin makePrimaryGradient ($use, $important: 'no') {
-  $ms-linear-gradient: -ms-linear-gradient(45deg, $lighter-ico-color 0%, $darker-ico-color 100%); /* ie10+ */
-  $linear-gradient: linear-gradient(45deg, $lighter-ico-color 0%, $darker-ico-color 100%);
-
-  @if ($use == 'background') {
-    background: $ms-linear-gradient;
-    background: $linear-gradient;
-    @if ($important == 'important') {
-      background: $ms-linear-gradient !important;
-      background: $linear-gradient !important;
-    }
-  } @else if ($use == 'border') {
-    // not needed now
-  }
-}
-
-.bg-primary-gradient {
-  @include makePrimaryGradient('background');
-}
-
-.btn-ico-primary {
-  @include makePrimaryGradient('background');
-  font-size: $font-size-h5;
-  border-radius: $button-border-radius-basic;
-  padding: 0 $btn-horizontal-padding;
-  height: 4rem;
-  color: white;
-
-  &:before {
-    content: '';
-    display: inline-block;
-    vertical-align: middle;
-    height: 100%;
-  }
-
-  /* fixing basic .btn bootstrap class, where transparent border makes bad visual effect */
-  border-left: none;
-  border-right: none;
-
-  &:hover,
-  &:focus {
-    color: white;
-  }
-
-  &:active {
-    @include makePrimaryGradient('background');
-  }
-
-  @media (max-width: $screen-sm-max) {
-    @include full-width();
-  }
-}
-
-
-.btn-ico-secondary {
-  font-size: $font-size-h5;
-  max-height: 22px;
-  padding: 0;
-  border: 0px;
-  color: $darker-ico-color;
-  @include full-width();
-
-  &:hover,
-  &:focus {
-    color: $darker-ico-color;
-  }
-}
-
-.btn-ico-secondary-wrapper-outer {
-  @include makePrimaryGradient('background');
-  height: 4rem;
-  border-radius: 25px;
-  padding: 3px;
-
-  @media (max-width: $screen-xs-max) {
-    margin-bottom: 1em;
-  }
-
-  @media (min-width: $screen-md-min) {
-    margin-left: -1rem;
-    margin-right: -1rem;
-  }
-}
-
-.btn-ico-secondary-wrapper-inner {
-  height: 3.4rem;
-  border-radius: $button-border-radius-basic;
-  background-color: $ico-box-background-color;
-}
-
-.ico-box {
-  // overrided from rubix theme
-  padding: 10px ($grid-gutter-width / 2);
+@mixin orange-btn() {
+  color: orange !important;
   &:hover {
-    padding: 10px ($grid-gutter-width / 2);
-  }
-
-  background-color: $ico-box-background-color;
-
-  .line-height {
-    line-height: 2.4rem;
-  }
-
-  &.is-featured, &.is-featured:hover {
-    border: 5px solid $ico-box-border !important;
+    color: darkorange !important;
   }
 }
 
-.ico-third-part-details {
+/* helper */
 
-  @media (min-width: $screen-md-min) {
-    min-height: 17.5rem;
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-c {
+  outline: none;
+  border-radius: 20px;
+  font-size: 12px;
+  text-transform: uppercase;
+  display: block;
+  width: 100%;
+  color: orange;
+  background: none;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.2s;
+  white-space: nowrap;
+  border: 2px solid orange;
+  user-select: none;
+  padding: 3px;
+  &:hover {
+    background: orange;
+    color: #DFA;
   }
 }
 
-.project-logo-wrapper {
-  @media (min-width: $screen-md-min) {
-    min-height: 19.2rem;
-  }
+/**//**//**//**//**/
+
+
+body {
+  background-color: #DFA;
 }
 
-.rating-status-logo-wrapper {
-  position: relative;
-  top: -8px;
-}
-
-.verified-status-logo {
-  color: $verified-status-logo-color;
-}
-
-.unverified-status-logo {
-  color: $unverified-status-logo-color;
-}
-
-.verification-in-process-logo {
-  color: $verification-in-process-logo-color;
-}
-
-.ico-profile-box {
-  background-color: $ico-box-background-color;
-
-  .line-height {
-    line-height: 2.4rem;
-  }
-}
-
-.panel-box {
-  background-color: $ico-box-background-color;
-}
-
-.badge-ico {
-  background-color: white;
-  color: $darker-ico-color;
-}
-
-/* category navigation component */
-#category-nav {
-
-  li a {
-    color: white;
-    height: 6rem;
-
-    border: none;
+header {
+  .navbar.navbar-inverse {
+    background-color: #858;
     border-radius: 0;
-    margin-right: 0;
-
-    display: flex;
-    align-items: center;
+    border: none;
   }
-
-  li.active {
-    a {
-      background-color: white;
-      color: $darker-ico-color;
-    }
-    .badge-ico {
-      font-weight: bold;
-      border: 2px solid $darker-ico-color;
-    }
+  .about-site {
+    cursor: url('https://www.w3schools.com/cssref/smiley.gif'), none;
+    font-size: 30px;
+    font-weight: 800;
+    @include orange-btn();
   }
-
-  @media (max-width: $grid-float-breakpoint - 1) {
-    & {
-      padding-bottom: 4rem;
-    }
-
-    li {
-      width: 100%;
-    }
-  }
-
-  @media (min-width: $grid-float-breakpoint) {
-    width: 100%;
+  .orange > a {
+    @include orange-btn();
   }
 }
 
-#category-nav-wrapper {
-  min-height: initial;
-  border: none;
-  border-radius: initial;
-  color: white;
-
-  .ico-logo {
-    width: 15rem;
-    opacity: 0;
-    transition: opacity 1s;
-  }
-
-  .sticked {
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-    top: 0rem;
-    left: 0;
-    @include makePrimaryGradient('background');
-
-    .ico-logo {
-      opacity: 1;
-    }
-  }
-
-  @media (min-width: $grid-float-breakpoint) {
-    .navbar-header {
-      display: none;
-    }
-  }
-
-  @media (max-width: $grid-float-breakpoint - 1) {
-    .navbar-collapse {
-      border-top: solid 2px $navbar-default-bg;
-    }
-  }
-
-  #mobile-status-bar {
-    max-height: 6rem;
-    max-width: 100%;
-
-    .main-status-title {
-      font-weight: bold;
-    }
-
-    .icon-bar {
-      height: 3px;
-      background-color: white;
-    }
-
-    .navbar-toggle {
-      border-width: 2px;
-      &.collapsed {
-        border-width: 1px;
-      }
-
-      &:hover, &:focus {
-        background-color: transparent;
-      }
-    }
-
+#logInPage h4 {
+  @media (max-width: 1152px) {
+    padding-top: 12px;
   }
 }
 
-.hidden-on-mobile-view {
-  @media (max-width: $grid-float-breakpoint - 1) {
-    display: none;
+.log-in-form {
+  @media (max-width: 1152px) {
+    margin: 0 1em 1em;
   }
-}
-
-.user-menu-dropdown-container {
-  min-height: $user-menu-dropdown-min-height;
-}
-
-/* user util navigation component */
-#user-menu-dropdown-wrapper {
-  color: $white;
-
-  #user-menu-dropdown-body {
-    color: $white;
-    font-size: $font-size-h2;
-    min-height: $user-menu-dropdown-min-height;
-    padding-top: 0;
-    @include makePrimaryGradient('background');
-  }
-
-  li a {
-    color: black;
-  }
-
-  li.active a {
-    color: $white;
-    font-weight: bold;
-    @include makePrimaryGradient('background', 'important');
-  }
-}
-
-#top-header {
-
-  &.bg-header-img {
-    height: 19rem;
-    background-image: url($mainHeaderBackground);
-    background-position: 50%;
-    background-size: 80% 400%;
-  }
-
-  .opacity-plane {
-    height: 100%;
-    background-color:rgba(0, 0, 0, 0.7);
-  }
-}
-
-.ico-title-label {
-  color: $darker-ico-color;
-  text-transform: uppercase;
-  font-size: $font-size-h5;
-  font-weight: bold;
-}
-
-@mixin ico-links-value () {
-  color: $ico-text-value-color;
-  text-decoration: underline;
-}
-
-@mixin link-circle-border ($activeState) {
-  border-radius: 50%;
-  @if ($activeState == 'normal') {
-    width: 36px;
-    height: 36px;
-  } @else if($activeState == 'highlight') {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-.ico-links-section {
-  .link-box {
-    min-height: 40px;
-  }
-  .active-link-caption {
-    @include ico-links-value();
-  }
-  .disabled-link-caption {
-    color: $ico-grey-color;
-  }
-  a.active-link-icon {
-    color: $darker-ico-color;
-  }
-
-  .disabled-link-icon {
-    color: $ico-grey-color;
-  }
-
-  .disabled-link-circle-border {
-    border: 2px solid $ico-grey-color;
-    @include link-circle-border('normal');
-  }
-
-  .active-link-circle-border {
-    border: 2px solid $darker-ico-color;
-    @include link-circle-border('normal');
-
-    &:active, &:hover {
-      @include link-circle-border('highlight');
-      a span {
-        font-size: $font-size-h3;
-      }
-    }
-  }
-
-}
-
-.ico-text-value {
-  color: $ico-text-value-color;
-  &.primary-value {
-    font-weight: bolder;
-  }
-}
-
-.ico-grey-text-value {
-  font-weight: bold;
-  text-transform: uppercase;
-  color: $ico-grey-color;
-  letter-spacing: 2px;
-}
-
-.ico-darker-grey-text-value {
-  color: $ico-dark-grey-color;
-}
-
-.hr-limiter {
-  border: 1px solid $ico-grey-color2;
-}
-
-.team-member-name {
-  color: $darker-ico-color;
-}
-
-a.team-member-link {
-  width: 32px;
-
-  span {
-    vertical-align: top;
-  }
-  &:hover, &:active {
-    span {
-      font-size: $font-size-h3;
-      vertical-align: middle;
+  background-color: #DEB;
+  border-radius: 20px;
+  box-shadow: 0 0px 10px #D84;
+  color: #962;
+  .form-control {
+    &:focus {
+      border-color: #66AF50;
     }
   }
 }
-
-
-
-.min-height-1-line {
-  min-height: $line-height-computed;
-}
-

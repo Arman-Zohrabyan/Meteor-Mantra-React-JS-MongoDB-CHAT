@@ -1,18 +1,25 @@
 import React from 'react';
-import { Nav, NavItem } from '@sketchpixy/rubix';
+import { Navbar, Nav , NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 
 export default class Navigation extends React.Component {
-  handleSelect(selectedKey) {
-    console.log('selected ' + selectedKey);
-  }
   
   render() {
     return (
-      <Nav bsStyle="pills" className='nav-orange75' activeKey={1} onSelect={this.handleSelect}>
-        <NavItem eventKey={1} href="/home">NavItem 1 content</NavItem>
-        <NavItem eventKey={2} title="Item">NavItem 2 content</NavItem>
-        <NavItem eventKey={3} disabled>NavItem 3 content</NavItem>
-      </Nav>
+      <Navbar inverse collapseOnSelect>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <a className="about-site" href="#">Meteor CHAT</a>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav pullRight>
+            <NavItem className="orange" eventKey={1} href="#">Rooms</NavItem>
+            <NavItem className="orange" eventKey={2} href="#">Create Room</NavItem>
+            <NavItem className="orange" eventKey={3} href="#">Log In</NavItem>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     );
   }
 }
