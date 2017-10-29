@@ -5,7 +5,7 @@ const Form = t.form.Form;
 
 import LogInForm from '/lib/logInForm';
 
-const generateRenderOption = ( FormHelper ) => {
+const generateRenderOption = ( FormHelper, infoAboutRegistration ) => {
   const formLayout = (locals) => {
     const currentForm = FormHelper.getForm();
     return (
@@ -14,7 +14,7 @@ const generateRenderOption = ( FormHelper ) => {
           return (
             <div key={sectionKey}>
               <h4 className="flex-center">{currentForm[sectionKey].greeting}</h4>
-              <h4 className="flex-center">{currentForm[sectionKey].info}</h4>
+              <h4 className="flex-center">{infoAboutRegistration ? infoAboutRegistration.replace(/"/g,'') : currentForm[sectionKey].info}</h4>
               <div className="row">
                 <div className="col-xs-10 col-xs-offset-1">
                   {currentForm[sectionKey].fields.map((field) => {
@@ -51,18 +51,21 @@ export default class LogIn extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { FormHelper } = nextProps;
 
-    this.refs.joinForm.refs.input.removeErrors();
+    this.refs.authenticationForm.refs.input.removeErrors();
     
     this.setState({
-      formRenderOptions: generateRenderOption(FormHelper),
+      formRenderOptions: generateRenderOption(FormHelper, nextProps.infoAboutRegistration),
       formValue: FormHelper.getDefaultValues()
     });
+    if(nextProps.infoAboutRegistration) {
+      nextProps.removeInfoAboutRegistration();
+    }
   }
 
   getError(alreadyExistingData, errorMsg) {
     Object.keys(alreadyExistingData).forEach((inputName) => {
       if(alreadyExistingData[inputName]) {
-        this.refs.joinForm.refs.input.refs[inputName].setState({hasError: true});
+        this.refs.authenticationForm.refs.input.refs[inputName].setState({hasError: true});
       }
     });
     this.setState({errorMsg});
@@ -70,7 +73,7 @@ export default class LogIn extends React.Component {
 
   sendAuthenticationRequest(event) {
     const type = (this.props.form === 'LogInForm') ? 'login' : 'registration';
-    const values = this.refs.joinForm.getValue();
+    const values = this.refs.authenticationForm.getValue();
     if (!values) {
       console.warn('Validation Error.');
     } else {
@@ -79,7 +82,7 @@ export default class LogIn extends React.Component {
   }
 
   onChange(formValue, path) {
-    const formComponent = this.refs.joinForm.getComponent(path);
+    const formComponent = this.refs.authenticationForm.getComponent(path);
     if (formComponent) {
       formComponent.validate();
     }
@@ -95,7 +98,7 @@ export default class LogIn extends React.Component {
           <div className="row">
             <div className="col-md-8 col-md-offset-2 log-in-form">
               <Form
-                ref="joinForm"
+                ref="authenticationForm"
                 type={FormHelper.getType()}
                 options={this.state.formRenderOptions}
                 value={this.state.formValue}

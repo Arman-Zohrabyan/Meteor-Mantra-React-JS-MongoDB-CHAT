@@ -2,7 +2,6 @@ import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 
 import AuthHelpers from '../lib/authenticationHelpers';
-import {Users} from '/lib/collections';
 
 export default function () {
   Meteor.methods({
@@ -15,9 +14,9 @@ export default function () {
       if(valuesEmailAndName === 'free') {
         const createdAt = new Date();
         const userData = Object.assign({_id, createdAt}, formValues);
-        Users.insert(userData, (err) => {
+        Meteor.users.insert(userData, (err) => {
           if(err) {
-            console.error('Error during insert into Users collection in method authentication.registration: ', err);
+            console.error('Error during insert into Meteor.users collection in method authentication.registration: ', err);
           }
         });
         return true;
@@ -27,20 +26,25 @@ export default function () {
     }
   });
 
-  /*Meteor.methods({
-    'posts.createComment'(_id, postId, text) {
-      check(_id, String);
-      check(postId, String);
-      check(text, String);
+  Meteor.methods({
+    'authentication.logIn'(formValues) {
+      check(formValues, Object);
+      const { email, password } = formValues;
 
-      // Show the latency compensations
-      Meteor._sleepForMs(500);
+      const isCorrectEmail = AuthHelpers.isCorrectEmail(email);
 
-      // XXX: Do some user authorization
-      const createdAt = new Date();
-      const author = 'The User';
-      const comment = {_id, postId, author, text, createdAt};
-      Comments.insert(comment);
+      if(isCorrectEmail) {
+        const isCorrectPassword = AuthHelpers.isCorrectPassword(email, password);
+
+        if(isCorrectPassword) {
+
+          return Meteor.users.findOne({email, password});
+        }
+        console.warn('Warn during method authentication.logIn incorrect password');
+        return {password: true};
+      }
+      console.warn('Warn during method authentication.logIn incorrect email and password');
+      return {email: true, password: true};
     }
-  });*/
+  });
 }

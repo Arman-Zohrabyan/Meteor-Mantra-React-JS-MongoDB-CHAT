@@ -6,15 +6,18 @@ import LogIn from '../components/logIn';
 import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
 
 export const composer = ({context, form}, onData) => {
-	const forms = {LogInForm, RegistrationForm};
-	const FormHelper = forms[form];
-	
-  onData(null, { FormHelper });
+  const { LocalState } = context();
+
+  const forms = {LogInForm, RegistrationForm};
+  const FormHelper = forms[form];
+  
+  onData(null, { FormHelper, infoAboutRegistration: LocalState.keys['REGISTRATION'] });
 };
 
 export const depsMapper = (context, actions) => ({
-  //context: () => context,
-  authenticationRequest: actions.authentication.authenticationRequest
+  context: () => context,
+  authenticationRequest: actions.authentication.authenticationRequest,
+  removeInfoAboutRegistration: actions.authentication.removeInfoAboutRegistration
 });
 
 export default composeAll(

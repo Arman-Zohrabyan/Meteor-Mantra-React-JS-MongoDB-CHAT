@@ -1,26 +1,8 @@
 import AuthHelpers from '/client/lib/authenticationHelpers';
 
 export default {
-  create({Meteor, LocalState, FlowRouter}, title, content) {
-    if (!title || !content) {
-      return LocalState.set('SAVING_ERROR', 'Title & Content are required!');
-    }
-
-    LocalState.set('SAVING_ERROR', null);
-
-    const id = Meteor.uuid();
-    // There is a method stub for this in the config/method_stubs
-    // That's how we are doing latency compensation
-    Meteor.call('posts.create', id, title, content, (err) => {
-      if (err) {
-        return LocalState.set('SAVING_ERROR', err.message);
-      }
-    });
-    FlowRouter.go(`/post/${id}`);
-  },
-
-  clearErrors({LocalState}) {
-    return LocalState.set('SAVING_ERROR', null);
+  removeInfoAboutRegistration({LocalState}) {
+    return LocalState.set('REGISTRATION', null);
   },
 
   authenticationRequest({Meteor, LocalState, FlowRouter}, type, formValues, getErr) {
@@ -32,16 +14,29 @@ export default {
         } else {
           if(res === true) {
             console.warn('User successfully created');
+            LocalState.set('REGISTRATION', 'You have successfully registered!');
             FlowRouter.go('chat.logIn');
           } else {
-            console.error('Name or Email already exist');
+            console.error('Name or Email already exist.');
             const errorMsg = AuthHelpers.createRegistrationErrorMessage(res);
             getErr(res, errorMsg);
           }
         }
       });
     } else if (type === 'login') {
-
+      Meteor.call('authentication.logIn', formValues, (err, res) => {
+        if(err) {
+          console.error('Error durng action authentication call authentication.logIn', err);
+        } else {
+          if(res._id) {
+            console.warn('WELCOME!');
+          } else {
+            console.error('Email or Password not found.');
+            const errorMsg = AuthHelpers.createLogInErrorMessage(res);
+            getErr(res, errorMsg);
+          }
+        }
+      });
     }
   }
 };
