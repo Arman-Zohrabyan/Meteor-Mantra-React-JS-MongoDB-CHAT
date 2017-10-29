@@ -1,5 +1,7 @@
-import posts from './posts';
+//import posts from './posts';
+import authentication from './authentication';
 
 export default function () {
-  posts();
+  //posts();
+  authentication();
 }

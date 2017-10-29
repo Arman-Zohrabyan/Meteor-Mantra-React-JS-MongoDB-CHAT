@@ -14,7 +14,7 @@ export const composer = ({context, form}, onData) => {
 
 export const depsMapper = (context, actions) => ({
   //context: () => context,
-  //checkToken: actions.serviceIntegrations.checkReCaptchaToken
+  authenticationRequest: actions.authentication.authenticationRequest
 });
 
 export default composeAll(
