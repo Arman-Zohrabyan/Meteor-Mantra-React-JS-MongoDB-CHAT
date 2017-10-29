@@ -4,24 +4,23 @@ import {mount} from 'react-mounter';
 import MainLayout from './components/main_layout';
 
 import JoinToChat from './containers/joinToChat';
+import Rooms from './components/rooms';
 
 export default function (inject, context, actions) {
-  const { FlowRouter } = context;
+  const { FlowRouter, Meteor } = context;
   const MainLayoutCtx = inject(MainLayout);
 
   FlowRouter.route('/', {
     name: 'chat.home',
     action() {
+      Meteor.userId() ?
+      FlowRouter.redirect('/rooms') :
       FlowRouter.redirect('/log-in');
-      /*mount(MainLayoutCtx, {
-        content: () => (<LogIn />),
-        context: () => context
-      });*/
     }
   });
 
   FlowRouter.route('/log-in', {
-    name: 'chat.logIn',
+    name: 'authentication.logIn',
     action() {
       mount(MainLayoutCtx, {
         content: () => (<JoinToChat  form="LogInForm"/>),
@@ -31,10 +30,20 @@ export default function (inject, context, actions) {
   });
 
   FlowRouter.route('/sign-up', {
-    name: 'chat.registration',
+    name: 'authentication.registration',
     action() {
       mount(MainLayoutCtx, {
         content: () => (<JoinToChat  form="RegistrationForm"/>),
+        context: () => context
+      });
+    }
+  });
+
+  FlowRouter.route('/rooms', {
+    name: 'chat.rooms',
+    action() {
+      mount(MainLayoutCtx, {
+        content: () => (<Rooms  />),
         context: () => context
       });
     }

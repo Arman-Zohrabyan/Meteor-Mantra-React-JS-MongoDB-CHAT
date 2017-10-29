@@ -15,7 +15,7 @@ export default {
           if(res === true) {
             console.warn('User successfully created');
             LocalState.set('REGISTRATION', 'You have successfully registered!');
-            FlowRouter.go('chat.logIn');
+            FlowRouter.go('authentication.logIn');
           } else {
             console.error('Name or Email already exist.');
             const errorMsg = AuthHelpers.createRegistrationErrorMessage(res);
@@ -30,6 +30,8 @@ export default {
         } else {
           if(res._id) {
             console.warn('WELCOME!');
+            Meteor.loginWithToken(res._id)
+            FlowRouter.go('chat.rooms');
           } else {
             console.error('Email or Password not found.');
             const errorMsg = AuthHelpers.createLogInErrorMessage(res);

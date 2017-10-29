@@ -37,7 +37,6 @@ export default function () {
         const isCorrectPassword = AuthHelpers.isCorrectPassword(email, password);
 
         if(isCorrectPassword) {
-
           return Meteor.users.findOne({email, password});
         }
         console.warn('Warn during method authentication.logIn incorrect password');
