@@ -14,7 +14,7 @@ const generateRenderOption = ( FormHelper, infoAboutRegistration ) => {
           return (
             <div key={sectionKey}>
               <h4 className="flex-center">{currentForm[sectionKey].greeting}</h4>
-              <h4 className="flex-center">{infoAboutRegistration ? infoAboutRegistration.replace(/"/g,'') : currentForm[sectionKey].info}</h4>
+              <h4 className="flex-center">{(infoAboutRegistration) ? infoAboutRegistration.replace(/"/g,'') : currentForm[sectionKey].info}</h4>
               <div className="row">
                 <div className="col-xs-10 col-xs-offset-1">
                   {currentForm[sectionKey].fields.map((field) => {

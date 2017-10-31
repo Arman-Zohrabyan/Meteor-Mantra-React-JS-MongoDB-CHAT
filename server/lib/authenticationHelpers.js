@@ -27,10 +27,6 @@ export default class AuthHelpers {
     })(userId, AuthHelpers.generateLoginToken());
   }
 
-
-
-
-
   static valuesEmailAndName(email, username) {
     if (!email) {
       console.error('Error during isEmailAndNameFree: ', 'email is required');
@@ -42,7 +38,7 @@ export default class AuthHelpers {
     if(isEmailFree && isNameFree) {
       return 'free';
     }
-    return {email: !isEmailFree, username: !isNameFree};
+    return [400, {email: !isEmailFree, username: !isNameFree}];
   }
 
   static isCorrectEmail(email) {
@@ -53,17 +49,12 @@ export default class AuthHelpers {
     return existEmail;
   }
 
-
-  
-
-  static isCorrectPassword(email, password) {
-    if (!email) {
-      console.error('Error during isCorrectPassword: ', 'email is required');
-    } else if (!password) {
-      console.error('Error during isCorrectPassword: ', 'password is required');
-    }
-    const existEmail = (Meteor.users.find({emails: {$elemMatch: {address: email}}, password}).fetch().length === 1);
-    return existEmail;
+  static changeUserDataStructure(_id, obj) {
+    const forQuery = {};
+    Object.keys(obj).forEach( (key) => {
+      forQuery[`profile.${key}`] = obj[key];
+    })
+    Meteor.users.upsert({_id}, {$set: forQuery});
   }
 
 }

@@ -11,16 +11,16 @@ export default function () {
       const valuesEmailAndName = AuthHelpers.valuesEmailAndName(formValues.email, formValues.username);
 
       if(valuesEmailAndName === 'free') {
-        const accId = Accounts.createUser({
+        const userId = Accounts.createUser({
           username: formValues.username,
           email: formValues.email,
           password: formValues.password,
-          phone: formValues.phone,
           profile: {
-            name: formValues.username,
+            name: formValues.name,
             createdOn: new Date()
           }
         });
+        AuthHelpers.changeUserDataStructure(userId, {phone: formValues.phone});
         return true;
       }
       console.warn('Warn during method authentication.registration user and email already exist');
@@ -29,23 +29,23 @@ export default function () {
   });
 
   Meteor.methods({
-    'authentication.logIn'(formValues) {
-      check(formValues, Object);
-      const { email, password } = formValues;
+    'authentication.logIn'(email, password) {
+      check(email, String);
+      check(password, String);
 
-      const isCorrectEmail = AuthHelpers.isCorrectEmail(email);
-
-      if(isCorrectEmail) {
-        const isCorrectPassword = AuthHelpers.isCorrectPassword(email, password);
-
-        if(isCorrectPassword) {
-          return Meteor.users.findOne({email, password});
-        }
-        console.warn('Warn during method authentication.logIn incorrect password');
-        return {password: true};
+      if(!AuthHelpers.isCorrectEmail(email)) {
+        return [400, {email: true, password: true}];
       }
-      console.warn('Warn during method authentication.logIn incorrect email and password');
-      return {email: true, password: true};
+
+      const user = Meteor.users.findOne({emails: {$elemMatch: {address: email}}});
+
+      password = {digest: password, algorithm: 'sha-256'};
+      const checkPassword = Accounts._checkPassword(user, password);
+
+      if(checkPassword.error) {
+        return [400, {password: true}];
+      }
+      return AuthHelpers.saveLoginToken(user._id);
     }
   });
 }
