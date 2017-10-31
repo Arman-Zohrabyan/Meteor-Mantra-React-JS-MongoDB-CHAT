@@ -5,18 +5,20 @@ import AuthHelpers from '../lib/authenticationHelpers';
 
 export default function () {
   Meteor.methods({
-    'authentication.registration'(_id, formValues) {
-      check(_id, String);
+    'authentication.registration'(formValues) {
       check(formValues, Object);
 
-      const valuesEmailAndName = AuthHelpers.valuesEmailAndName(formValues.email, formValues.name);
+      const valuesEmailAndName = AuthHelpers.valuesEmailAndName(formValues.email, formValues.username);
 
       if(valuesEmailAndName === 'free') {
-        const createdAt = new Date();
-        const userData = Object.assign({_id, createdAt}, formValues);
-        Meteor.users.insert(userData, (err) => {
-          if(err) {
-            console.error('Error during insert into Meteor.users collection in method authentication.registration: ', err);
+        const accId = Accounts.createUser({
+          username: formValues.username,
+          email: formValues.email,
+          password: formValues.password,
+          phone: formValues.phone,
+          profile: {
+            name: formValues.username,
+            createdOn: new Date()
           }
         });
         return true;

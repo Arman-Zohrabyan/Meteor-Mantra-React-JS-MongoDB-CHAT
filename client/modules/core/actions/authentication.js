@@ -7,8 +7,7 @@ export default {
 
   authenticationRequest({Meteor, LocalState, FlowRouter}, type, formValues, getErr) {
     if(type === 'registration') {
-      const _id = Meteor.uuid();
-      Meteor.call('authentication.registration', _id, formValues, (err, res) => {
+      Meteor.call('authentication.registration', formValues, (err, res) => {
         if(err) {
           console.error('Error durng action authentication call authentication.registration', err);
         } else {

@@ -27,3 +27,4 @@ fortawesome:fontawesome@4.7.0
 clinical:fonts
 outatime:jwt-simple@=0.3.0
 accounts-base
+accounts-password
