@@ -14,12 +14,12 @@
 }
 
 .btn-c {
+  cursor: pointer;
   outline: none;
   border-radius: 20px;
   font-size: 12px;
   text-transform: uppercase;
   display: block;
-  width: 100%;
   color: orange;
   background: none;
   text-align: center;
@@ -33,6 +33,20 @@
     background: orange;
     color: #DFA;
   }
+}
+.btn-c.btn-full {
+  width: 100%;
+}
+.btn-c.btn-50 {
+  width: 50%;
+}
+.btn-c.btn-20 {
+  width: 20%;
+}
+
+hr {
+  margin: 1em 20px;
+  border: 2px dashed steelblue;
 }
 
 /**//**//**//**//**/
@@ -59,13 +73,13 @@ header {
   }
 }
 
-#logInPage h4 {
+h4 {
   @media (max-width: 1152px) {
-    padding-top: 12px;
+    padding: 12px 0;
   }
 }
 
-.log-in-form {
+.window {
   @media (max-width: 1152px) {
     margin: 0 1em 1em;
   }

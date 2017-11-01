@@ -2,9 +2,9 @@ import React from 'react';
 import {mount} from 'react-mounter';
 
 import MainLayout from './components/main_layout';
-
 import JoinToChat from './containers/joinToChat';
-import Rooms from './components/rooms';
+import OpenRoom from './containers/openRoom';
+import Rooms from './containers/rooms';
 
 export default function (inject, context, actions) {
   const { FlowRouter, Meteor } = context;
@@ -44,6 +44,16 @@ export default function (inject, context, actions) {
     action() {
       mount(MainLayoutCtx, {
         content: () => (<Rooms  />),
+        context: () => context
+      });
+    }
+  });
+
+  FlowRouter.route('/open-new-room', {
+    name: 'chat.openNewRoom',
+    action() {
+      mount(MainLayoutCtx, {
+        content: () => (<OpenRoom  />),
         context: () => context
       });
     }

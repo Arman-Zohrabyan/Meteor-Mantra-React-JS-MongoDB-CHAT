@@ -96,7 +96,7 @@ export default class LogIn extends React.Component {
       <div id="logInPage">
         <div className="container">
           <div className="row">
-            <div className="col-md-8 col-md-offset-2 log-in-form">
+            <div className="col-md-8 col-md-offset-2 window">
               <Form
                 ref="authenticationForm"
                 type={FormHelper.getType()}
@@ -107,7 +107,7 @@ export default class LogIn extends React.Component {
               {this.state.errorMsg ? <div className="has-error flex-center"><span className="help-block">{this.state.errorMsg}</span></div> : ''}
               <div className="row padding-vertical-md">
                 <div className="col-xs-4 col-xs-offset-4">
-                  <button className="btn-c" onClick={this.sendAuthenticationRequest.bind(this)}>{btnContent}</button>
+                  <button className="btn-c btn-full" onClick={this.sendAuthenticationRequest.bind(this)}>{btnContent}</button>
                 </div>
               </div>
             </div>
