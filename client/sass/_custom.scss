@@ -45,8 +45,27 @@
 }
 
 hr {
-  margin: 1em 20px;
+  margin: 1em 0;
   border: 2px dashed steelblue;
+}
+.join-btn {
+  border: 2px solid cornflowerblue;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  font-style: italic;
+  &:hover {
+    background-color: cadetblue;
+    border: 2px solid darkslategrey;
+  }
+}
+.room-content-header {
+  padding-left: 20px;
+  padding-right: 5px;
+  color: black;
+  font-style: normal;
 }
 
 /**//**//**//**//**/
@@ -54,6 +73,7 @@ hr {
 
 body {
   background-color: #DFA;
+  min-width: 500px;
 }
 
 header {
@@ -93,3 +113,4 @@ h4 {
     }
   }
 }
+

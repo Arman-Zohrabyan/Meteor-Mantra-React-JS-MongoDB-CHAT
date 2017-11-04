@@ -17,10 +17,11 @@ export default class OpenRoom extends React.Component {
 
   createNewRoom() {
     const value = this.refs.roomForm.getValue();
-    if(!values) {
+    if(!value) {
       console.warn('Validation Error.');
     } else {
-      
+      this.props.createRoom(value);
+      FlowRouter.go('chat.rooms');
     }
   }
 
@@ -41,7 +42,7 @@ export default class OpenRoom extends React.Component {
                 </div>
               </div>
               <div className="flex-center padding-vertical-md">
-                <div className="btn-c btn-20 margin-horizontal-md onClick={this.createNewRoom.bind(this)}">Open</div>
+                <div className="btn-c btn-20 margin-horizontal-md" onClick={this.createNewRoom.bind(this)}>Open</div>
                 <div className="btn-c btn-20 margin-horizontal-md" onClick={() => FlowRouter.go('chat.rooms')}>Back</div>
               </div>
             </div>

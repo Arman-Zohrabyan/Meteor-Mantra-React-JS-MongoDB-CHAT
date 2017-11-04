@@ -1,9 +1,14 @@
-import Rooms from '../components/rooms';
+import ChatRooms from '../components/chatRooms';
 import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
+
+import {Rooms} from '/lib/collections';
 
 export const composer = ({context, form}, onData) => {
   if(Meteor.userId()) {
-    onData(null, {});
+    if(Meteor.subscribe('chatRoom.getRooms').ready()) {
+      const rooms = Rooms.find().fetch();
+      onData(null, {rooms});
+    }
   } else {
     FlowRouter.redirect('/log-in');
   }
@@ -16,4 +21,4 @@ export const depsMapper = (context, actions) => ({
 export default composeAll(
   composeWithTracker(composer),
   useDeps(depsMapper)
-)(Rooms);
+)(ChatRooms);

@@ -4,7 +4,7 @@ import {mount} from 'react-mounter';
 import MainLayout from './components/main_layout';
 import JoinToChat from './containers/joinToChat';
 import OpenRoom from './containers/openRoom';
-import Rooms from './containers/rooms';
+import ChatRooms from './containers/chatRooms';
 
 export default function (inject, context, actions) {
   const { FlowRouter, Meteor } = context;
@@ -43,7 +43,7 @@ export default function (inject, context, actions) {
     name: 'chat.rooms',
     action() {
       mount(MainLayoutCtx, {
-        content: () => (<Rooms  />),
+        content: () => (<ChatRooms  />),
         context: () => context
       });
     }

@@ -10,7 +10,8 @@ export const composer = ({context, form}, onData) => {
 };
 
 export const depsMapper = (context, actions) => ({
-  context: () => context
+  context: () => context,
+  createRoom: actions.chatRoom.createRoom
 });
 
 export default composeAll(
