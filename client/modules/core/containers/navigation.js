@@ -1,7 +1,7 @@
 import Navigation from '../components/navigation';
 import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
 
-export const composer = ({context, form}, onData) => {
+export const composer = ({context}, onData) => {
   if(Meteor.userId()) {
     onData(null, {isRegistered: true});
   } else {

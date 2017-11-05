@@ -1,7 +1,7 @@
 //import posts from './posts';
-import rooms from './rooms';
+import chatRooms from './chatRooms';
 
 export default function () {
-  rooms()
+  chatRooms()
   //posts();
 }

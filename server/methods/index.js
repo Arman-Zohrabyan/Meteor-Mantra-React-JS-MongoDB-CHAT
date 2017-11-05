@@ -1,9 +1,9 @@
 //import posts from './posts';
 import authentication from './authentication';
-import rooms from './rooms';
+import chatRooms from './chatRooms';
 
 export default function () {
   //posts();
   authentication();
-  rooms();
+  chatRooms();
 }

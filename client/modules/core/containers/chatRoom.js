@@ -1,20 +1,21 @@
-import OpenRoom from '../components/openRoom';
+import ChatRoom from '../components/chatRoom';
 import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
 
-export const composer = ({context}, onData) => {
+import {Rooms} from '/lib/collections';
+
+export const composer = ({context, roomId}, onData) => {
   if(Meteor.userId()) {
-    onData(null, {});
+    onData(null, {roomId});
   } else {
     FlowRouter.redirect('/log-in');
   }
 };
 
 export const depsMapper = (context, actions) => ({
-  context: () => context,
-  createRoom: actions.chatRoom.createRoom
+  context: () => context
 });
 
 export default composeAll(
   composeWithTracker(composer),
   useDeps(depsMapper)
-)(OpenRoom);
+)(ChatRoom);

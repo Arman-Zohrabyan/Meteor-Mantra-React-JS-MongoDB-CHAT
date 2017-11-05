@@ -5,6 +5,7 @@ import MainLayout from './components/main_layout';
 import JoinToChat from './containers/joinToChat';
 import OpenRoom from './containers/openRoom';
 import ChatRooms from './containers/chatRooms';
+import ChatRoom from './containers/chatRoom';
 
 export default function (inject, context, actions) {
   const { FlowRouter, Meteor } = context;
@@ -39,6 +40,16 @@ export default function (inject, context, actions) {
     }
   });
 
+  FlowRouter.route('/open-new-room', {
+    name: 'chat.openNewRoom',
+    action() {
+      mount(MainLayoutCtx, {
+        content: () => (<OpenRoom  />),
+        context: () => context
+      });
+    }
+  });
+
   FlowRouter.route('/rooms', {
     name: 'chat.rooms',
     action() {
@@ -49,11 +60,11 @@ export default function (inject, context, actions) {
     }
   });
 
-  FlowRouter.route('/open-new-room', {
-    name: 'chat.openNewRoom',
-    action() {
+  FlowRouter.route('/room/:roomId', {
+    name: 'chat.room',
+    action({roomId}) {
       mount(MainLayoutCtx, {
-        content: () => (<OpenRoom  />),
+        content: () => (<ChatRoom roomId={roomId} />),
         context: () => context
       });
     }

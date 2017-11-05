@@ -3,10 +3,10 @@ import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
 
 import {Rooms} from '/lib/collections';
 
-export const composer = ({context, form}, onData) => {
+export const composer = ({context}, onData) => {
   if(Meteor.userId()) {
     if(Meteor.subscribe('chatRoom.getRooms').ready()) {
-      const rooms = Rooms.find().fetch();
+      const rooms = Rooms.find({}).fetch();
       onData(null, {rooms});
     }
   } else {

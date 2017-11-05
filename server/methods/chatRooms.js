@@ -10,7 +10,7 @@ export default function () {
       check(roomName, String);
       const currentUserName = UserHelpers.getFirstNameByUserId(this.userId);
 
-      Rooms.insert({createdAt: new Date(), room: roomName, createdBy: currentUserName});
+      Rooms.insert({createdAt: new Date(), room: roomName, createdBy: currentUserName, messages: {}, online: []});
       console.warn('New room successfuly created');
     }
   });
