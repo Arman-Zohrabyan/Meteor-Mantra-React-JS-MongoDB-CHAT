@@ -3,12 +3,29 @@ import React from 'react';
 export default class ChatRoom extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props)
+
+    this.state = {
+      message: ''
+    };
   }
 
   componentDidMount() {
     const objDiv = document.getElementById("message-zone");
     objDiv.scrollTop = objDiv.scrollHeight;
+  }
+
+  sendMessage() {
+    const { roomId } = this.props;
+    const { message } = this.state;
+    this.props.sendMessage(roomId, message);
+
+    const messagearea = document.getElementById('messagearea');
+    messagearea.value = '';
+    this.setState({message: messagearea.value});
+  }
+
+  onChange(e) {
+    this.setState({message: e.target.value});
   }
 
   render() {
@@ -87,8 +104,8 @@ export default class ChatRoom extends React.Component {
                     </div>*/}
                   </div>
                   <div className="input-zone">
-                    <textarea placeholder="Write Your Message."></textarea>
-                    <div className="send-btn flex-center">Send</div>
+                    <textarea id='messagearea' placeholder="Write Your Message." onChange={this.onChange.bind(this)} />
+                    <div className="send-btn flex-center" onClick={this.sendMessage.bind(this)}>Send</div>
                   </div>
                 </div>
               </div>

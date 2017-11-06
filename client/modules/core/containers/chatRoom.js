@@ -12,7 +12,8 @@ export const composer = ({context, roomId}, onData) => {
 };
 
 export const depsMapper = (context, actions) => ({
-  context: () => context
+  context: () => context,
+  sendMessage: actions.chatRoom.sendMessage
 });
 
 export default composeAll(
