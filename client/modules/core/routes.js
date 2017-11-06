@@ -7,9 +7,9 @@ import OpenRoom from './containers/openRoom';
 import ChatRooms from './containers/chatRooms';
 import ChatRoom from './containers/chatRoom';
 
-export default function (inject, context, actions) {
+export default function (injectDeps, context, actions) {
   const { FlowRouter, Meteor } = context;
-  const MainLayoutCtx = inject(MainLayout);
+  const MainLayoutCtx = injectDeps(MainLayout);
 
   FlowRouter.route('/', {
     name: 'chat.home',

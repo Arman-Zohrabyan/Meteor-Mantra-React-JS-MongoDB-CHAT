@@ -9,6 +9,10 @@ export default class ChatRooms extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({rooms: nextProps.rooms});
+  }
+
   render() {
     return (
       <div id="rooms">

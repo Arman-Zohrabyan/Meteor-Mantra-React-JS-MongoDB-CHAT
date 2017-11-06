@@ -71,6 +71,9 @@ hr {
   padding-left: 20px;
   padding-right: 5px;
 }
+.marginT5B5 {
+  margin: 5px 0;
+}
 
 /**//**//**//**//**/
 
@@ -132,10 +135,9 @@ h4 {
   border-radius: 20px 0 0;
   padding: 0;
   p {
-    text-transform: capitalize;
     margin: 0;
   }
-  p:first-child {
+  .room-content-header {
     font-weight: bold;
     color: navajowhite;
     background: sandybrown;
@@ -156,16 +158,102 @@ h4 {
   border-radius: 0 20px 0 0;
   padding: 0;
   p {
-    text-transform: capitalize;
     margin: 0;
     font-weight: bolder;
   }
-  p:first-child {
+  p:not(:first-child) {
+    line-height: 18px;
+  }
+  .room-content-header {
     color: navajowhite;
     background: sandybrown;
     border: none;
     border-radius: 0 15px 0 0;
     padding: 10px 0;
   }
+  div.userMessage, div.currentUserMessage {
+    background: greenyellow;
+    width: 90%;
+    border-radius: 10px;
+    padding: 2px 15px;
+    margin: 5px 5px 0;
+    float: right;
+    .message-info {
+      line-height: 5px;
+      color: black;
+      font-size: 10px;
+      text-align: right;
+    }
+  }
+  div.currentUserMessage {
+    text-align: right;
+    float: left;
+    background: deepskyblue;
+    .message-info {
+      text-align: left;
+    }
+  }
 }
 
+.chat-message-zone {
+  height: 330px;
+  overflow-x: hidden;
+  div:last-child {
+    margin-bottom: 5px;
+  }
+}
+
+.input-zone {
+  height: 70px;
+  border-top: 2px solid sandybrown;
+  display: flex;
+  textarea {
+    margin: 0px;
+    height: 68px;
+    width: 87%;
+    resize: none;
+    outline: none;
+    border: none;
+    border-right: 2px solid sandybrown;
+    color: black;
+    font-size: 15px;
+    font-weight: bolder;
+    float: left;
+  }
+}
+textarea::-webkit-input-placeholder {
+  display: block;
+  text-align: center;
+  padding-top: 20px;
+}
+
+textarea::-moz-input-placeholder {
+  display: block;
+  text-align: center;
+  padding-top: 20px;
+}
+
+textarea:-moz-input-placeholder {
+  display: block;
+  text-align: center;
+  padding-top: 20px;
+}
+
+textarea:-ms-input-placeholder {
+  display: block;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.send-btn {
+  width: 13%;
+  font-size: 20px;
+  font-weight: bold;
+  color: #444;
+  background: #ccc;
+  cursor: pointer;
+  user-select: none;
+  &:hover {
+    background: #999;
+  }
+}

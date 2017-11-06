@@ -4,9 +4,10 @@ import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
 import {Rooms} from '/lib/collections';
 
 export const composer = ({context}, onData) => {
+  const {Meteor, Collections} = context();
   if(Meteor.userId()) {
     if(Meteor.subscribe('chatRoom.getRooms').ready()) {
-      const rooms = Rooms.find({}).fetch();
+      const rooms = Collections.Rooms.find({}).fetch();
       onData(null, {rooms});
     }
   } else {
