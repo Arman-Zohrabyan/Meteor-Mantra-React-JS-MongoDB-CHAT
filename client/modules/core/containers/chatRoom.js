@@ -1,11 +1,14 @@
 import ChatRoom from '../components/chatRoom';
 import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
 
-import {Rooms} from '/lib/collections';
-
 export const composer = ({context, roomId}, onData) => {
+  const {Meteor, Collections} = context();
   if(Meteor.userId()) {
-    onData(null, {roomId});
+    if(Meteor.subscribe('chatRoom.getMessages', roomId).ready()) {
+      let room = Collections.Rooms.find({}).fetch();
+      room = room[0];
+      onData(null, {room, currentUserId: Meteor.userId()});
+    }
   } else {
     FlowRouter.redirect('/log-in');
   }

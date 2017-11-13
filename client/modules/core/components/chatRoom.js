@@ -5,8 +5,17 @@ export default class ChatRoom extends React.Component {
     super(props);
 
     this.state = {
+      oldMessages: this.props.room.messages,
       message: ''
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({oldMessages: nextProps.room.messages});
+    setTimeout( () => {
+      const objDiv = document.getElementById("message-zone");
+      objDiv.scrollTop = objDiv.scrollHeight
+    },5000);
   }
 
   componentDidMount() {
@@ -17,11 +26,12 @@ export default class ChatRoom extends React.Component {
   sendMessage() {
     const { roomId } = this.props;
     const { message } = this.state;
-    this.props.sendMessage(roomId, message);
-
-    const messagearea = document.getElementById('messagearea');
-    messagearea.value = '';
-    this.setState({message: messagearea.value});
+    if(message.length > 0) {
+      this.props.sendMessage(roomId, message);
+      const messagearea = document.getElementById('messagearea');
+      messagearea.value = '';
+      this.setState({message: messagearea.value});
+    }
   }
 
   onChange(e) {
@@ -29,6 +39,7 @@ export default class ChatRoom extends React.Component {
   }
 
   render() {
+    const { oldMessages } = this.state;
     return (
       <div id="room">
         <div className="container">
@@ -37,7 +48,7 @@ export default class ChatRoom extends React.Component {
               
               <div className="padding-vertical-md">
                 <div className="btn-c btn-100 pull-left btn-close" onClick={() => FlowRouter.go('chat.rooms')}>Back</div>
-                <h4 className="flex-center marginT5B5">Room</h4>
+                <h4 className="flex-center marginT5B5">Room: {this.props.room.room}</h4>
               </div>
 
               <div className="row chat-content">
@@ -54,54 +65,17 @@ export default class ChatRoom extends React.Component {
                 <div className="col-sm-10 col-xs-9 chat-messages-section">
                   <p className="room-content-header flex-center">Messages</p>
                   <div id="message-zone" className="chat-message-zone">
-                    {/*<div className="currentUserMessage">
-                      <p>sdads</p>
-                      <p className="message-info">data: 12.02.2007, by: asdasd</p>
-                    </div>
-                    <div className="userMessage">
-                      <p>sdads</p>
-                      <p className="message-info">data: 12.02.2007, by: asdasd</p>
-                    </div>
-                    <div className="userMessage">
-                      <p>sdads</p>
-                      <p className="message-info">data: 12.02.2007, by: asdasd</p>
-                    </div>
-                    <div className="userMessage">
-                      <p>sdads</p>
-                      <p className="message-info">data: 12.02.2007, by: asdasd</p>
-                    </div>
-                    <div className="currentUserMessage">
-                      <p>sdads</p>
-                      <p className="message-info">data: 12.02.2007, by: asdasd</p>
-                    </div>
-                    <div className="userMessage">
-                      <p>sdads</p>
-                      <p className="message-info">data: 12.02.2007, by: asdasd</p>
-                    </div>
-                    <div className="userMessage">
-                      <p>sdads</p>
-                      <p className="message-info">data: 12.02.2007, by: asdasd</p>
-                    </div>
-                    <div className="userMessage">
-                      <p>sdads</p>
-                      <p className="message-info">data: 12.02.2007, by: asdasd</p>
-                    </div>
-                    <div className="userMessage">
-                      <p>sdads</p>
-                      <p className="message-info">data: 12.02.2007, by: asdasd</p>
-                    </div>
-                    <div className="userMessage">
-                      <p>sdads</p>
-                      <p className="message-info">data: 12.02.2007, by: asdasd</p>
-                    </div>
-                    <div className="userMessage">
-                      <p>sdads</p>
-                      <p className="message-info">data: 12.02.2007, by: asdasd</p>
-                    </div>
-                    <div className="userMessage">
-                      <p>sdads</p>
-                      <p className="message-info">data: 12.02.2007, by: asdasd</p>
-                    </div>*/}
+                    { oldMessages ?
+                      oldMessages.map( (msg, number) => {
+                        const currentUserMessage = (this.props.currentUserId === msg.userId);
+                        return (
+                          <div className={currentUserMessage ? 'currentUserMessage' : 'userMessage'} key={number}>
+                            <p>{msg.message}</p>
+                            <p className="message-info">data: {msg.sent.toString()}, by: {msg.by}</p>
+                          </div>
+                        );
+                      }) : ''
+                    }
                   </div>
                   <div className="input-zone">
                     <textarea id='messagearea' placeholder="Write Your Message." onChange={this.onChange.bind(this)} />

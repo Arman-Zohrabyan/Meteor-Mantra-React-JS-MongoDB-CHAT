@@ -22,7 +22,7 @@ export default function () {
       check(message, String);
       const currentUserName = UserHelpers.getFirstNameByUserId(this.userId);
 
-      Rooms.update( {_id: roomId}, {$push: { messages: {sent: new Date(), by: currentUserName, message} }});
+      Rooms.update( {_id: roomId}, {$push: { messages: {sent: new Date(), by: currentUserName, userId: this.userId, message} }});
       console.warn('New room successfuly created');
     }
   });
