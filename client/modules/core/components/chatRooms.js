@@ -24,7 +24,7 @@ export default class ChatRooms extends React.Component {
                 {
                   (this.state.rooms.length === 0) ?
                     <div className="has-error flex-center"><span className="help-block">No open rooms.</span></div> :
-                    <div className="col-xs-12">
+                    <div className="col-xs-12 join-btns">
                       {
                         this.state.rooms.map((val, key) => {{/*`  Online: 0`;*/}
                           return <div key={key} className="flex-center join-btn"  onClick={() => FlowRouter.go(`/room/${val._id}`)}>

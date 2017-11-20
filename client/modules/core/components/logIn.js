@@ -16,7 +16,7 @@ const generateRenderOption = ( FormHelper, infoAboutRegistration ) => {
               <h4 className="flex-center">{currentForm[sectionKey].greeting}</h4>
               <h4 className="flex-center">{(infoAboutRegistration) ? infoAboutRegistration.replace(/"/g,'') : currentForm[sectionKey].info}</h4>
               <div className="row">
-                <div className="col-xs-10 col-xs-offset-1">
+                <div className="col-sm-10 col-sm-offset-1 form-layout">
                   {currentForm[sectionKey].fields.map((field) => {
                     return locals.inputs[field];
                   })}
@@ -106,8 +106,8 @@ export default class LogIn extends React.Component {
               />
               {this.state.errorMsg ? <div className="has-error flex-center"><span className="help-block">{this.state.errorMsg}</span></div> : ''}
               <div className="row padding-vertical-md">
-                <div className="col-xs-4 col-xs-offset-4">
-                  <button className="btn-c btn-full" onClick={this.sendAuthenticationRequest.bind(this)}>{btnContent}</button>
+                <div className="text-center">
+                  <button className="btn-c" onClick={this.sendAuthenticationRequest.bind(this)}>{btnContent}</button>
                 </div>
               </div>
             </div>

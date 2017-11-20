@@ -19,7 +19,7 @@
   border-radius: 20px;
   font-size: 12px;
   text-transform: uppercase;
-  display: block;
+  display: inline-block;
   color: orange;
   background: none;
   text-align: center;
@@ -28,39 +28,51 @@
   white-space: nowrap;
   border: 2px solid orange;
   user-select: none;
-  padding: 3px;
+  padding: 3px 10px;
+  line-height: 20px;
   &:hover {
     background: orange;
     color: #DFA;
   }
-}
-.btn-c.btn-full {
-  width: 100%;
-}
-.btn-c.btn-50 {
-  width: 50%;
-}
-.btn-c.btn-20 {
-  width: 20%;
+  @media (max-width: 768px) {
+    line-height: 13px;
+    padding: 3px 8px;
+    font-size: 9px;
+  }
 }
 
 hr {
   margin: 1em 0;
   border: 2px dashed steelblue;
-}
-.join-btn {
-  border: 2px solid cornflowerblue;
-  border-radius: 15px;
-  margin-bottom: 5px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  font-style: italic;
-  &:hover {
-    background-color: cadetblue;
-    border: 2px solid darkslategrey;
+  @media (max-width: 768px) {
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-bottom: 0;
   }
 }
+
+.join-btns {
+  .join-btn {
+    border: 2px solid cornflowerblue;
+    border-radius: 15px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    font-style: italic;
+    &:hover {
+      background-color: cadetblue;
+      border: 2px solid darkslategrey;
+    }
+  }
+  @media (max-width: 768px) {
+    padding: 10px 10px 0;
+    .join-btn {
+      font-size: 12px;
+    }
+  }
+}
+
 .room-content-header {
   color: black;
   font-style: normal;
@@ -70,6 +82,10 @@ hr {
 .paddingL20R5 {
   padding-left: 20px;
   padding-right: 5px;
+  @media (max-width: 768px) {
+    padding-left: 10px;
+    padding-right: 3px;
+  }
 }
 .marginT5B5 {
   margin: 5px 0;
@@ -77,32 +93,52 @@ hr {
 
 /**//**//**//**//**/
 
-
-body {
-  background-color: #DFA;
-  min-width: 500px;
+nav.navbar {
+  @media (max-width: 768px) {
+    min-height: 50px;
+    a.navbar-brand {
+      height: 50px;
+      line-height: 0;
+    }
+    button.navbar-toggle {
+      margin-top: 7px;
+      margin-bottom: 7px;
+    }
+    li a {
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
+  }
 }
 
-header {
-  .navbar.navbar-inverse {
-    background-color: #858;
-    border-radius: 0;
-    border: none;
+
+div.form-layout {
+  span.error-block {
+    text-align: center;
   }
-  .about-site {
-    cursor: url('https://www.w3schools.com/cssref/smiley.gif'), none;
-    font-size: 30px;
-    font-weight: 800;
-    @include orange-btn();
-  }
-  .orange > a {
-    @include orange-btn();
+  @media (max-width: 768px) {
+    div.form-group {
+      margin-bottom: 10px;
+    }
+    label {
+      font-size: 13px;
+    }
+    span.error-block {
+      font-size: 12px;
+      margin: 0;
+    }
   }
 }
 
 h4 {
+  text-align: center;
   @media (max-width: 1152px) {
     padding: 12px 0;
+  }
+  @media (max-width: 768px) {
+    font-size: 14px;
+    padding: 12px 0 0;
+    margin: 0;
   }
 }
 
@@ -121,6 +157,33 @@ h4 {
     }
   }
 }
+
+
+body {
+  background-color: #DFA;
+}
+
+header {
+  .navbar.navbar-inverse {
+    background-color: #858;
+    border-radius: 0;
+    border: none;
+  }
+  .about-site {
+    @media (max-width: 768px) {
+      font-size: 15px;
+    }
+
+    cursor: url('https://www.w3schools.com/cssref/smiley.gif'), none;
+    font-size: 30px;
+    font-weight: 800;
+    @include orange-btn();
+  }
+  .orange > a {
+    @include orange-btn();
+  }
+}
+
 
 .chat-content {
   margin: 0 10px 25px;
