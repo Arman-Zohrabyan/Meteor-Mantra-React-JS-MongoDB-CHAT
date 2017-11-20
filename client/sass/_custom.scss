@@ -64,11 +64,30 @@ hr {
       background-color: cadetblue;
       border: 2px solid darkslategrey;
     }
+    .room-name, .room-created, .room-online {
+      text-align: left;
+      float: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .room-name, .room-created {
+      max-width: 40%;
+    }
+    .room-online {
+      max-width: 20%;
+    }
   }
   @media (max-width: 768px) {
     padding: 10px 10px 0;
     .join-btn {
       font-size: 12px;
+      .room-name, .room-created {
+        max-width: 50%;
+      }
+      .room-online {
+        display: none;
+      }
     }
   }
 }
@@ -83,7 +102,7 @@ hr {
   padding-left: 20px;
   padding-right: 5px;
   @media (max-width: 768px) {
-    padding-left: 10px;
+    padding-left: 5px;
     padding-right: 3px;
   }
 }

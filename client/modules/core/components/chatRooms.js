@@ -28,8 +28,9 @@ export default class ChatRooms extends React.Component {
                       {
                         this.state.rooms.map((val, key) => {{/*`  Online: 0`;*/}
                           return <div key={key} className="flex-center join-btn"  onClick={() => FlowRouter.go(`/room/${val._id}`)}>
-                            <span className="room-content-header paddingL20R5">Room:</span>{val.room}
-                            <span className="room-content-header paddingL20R5">CreatedBy:</span>{val.createdBy}
+                            <div className="room-name"><span className="room-content-header paddingL20R5">Room:</span>{val.room}</div>
+                            <div className="room-created"><span className="room-content-header paddingL20R5">CreatedBy:</span>{val.createdBy}</div>
+                            <div className="room-online"><span className="room-content-header paddingL20R5">Online:</span>0</div>
                           </div>;
                         })
                       }
