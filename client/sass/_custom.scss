@@ -112,25 +112,6 @@ hr {
 
 /**//**//**//**//**/
 
-nav.navbar {
-  @media (max-width: 768px) {
-    min-height: 50px;
-    a.navbar-brand {
-      height: 50px;
-      line-height: 0;
-    }
-    button.navbar-toggle {
-      margin-top: 7px;
-      margin-bottom: 7px;
-    }
-    li a {
-      padding-top: 2px;
-      padding-bottom: 2px;
-    }
-  }
-}
-
-
 div.form-layout {
   span.error-block {
     text-align: center;
@@ -183,6 +164,23 @@ body {
 }
 
 header {
+  nav.navbar {
+    @media (max-width: 768px) {
+      min-height: 50px;
+      a.navbar-brand {
+        height: 50px;
+        line-height: 0;
+      }
+      button.navbar-toggle {
+        margin-top: 7px;
+        margin-bottom: 7px;
+      }
+      li a {
+        padding-top: 2px;
+        padding-bottom: 2px;
+      }
+    }
+  }
   .navbar.navbar-inverse {
     background-color: #858;
     border-radius: 0;
@@ -207,75 +205,64 @@ header {
 .chat-content {
   margin: 0 10px 25px;
   display: flex;
-  box-shadow: 0px 0px 10px orangered;
-  border-radius: 20px 20px 0 0;
-}
+  border: 2px solid grey;
 
-.chat-online-users-section {
-  border-right: 1px solid sandybrown;
-  background: white;
-  border-radius: 20px 0 0;
-  padding: 0;
-  p {
-    margin: 0;
-  }
   .room-content-header {
-    font-weight: bold;
-    color: navajowhite;
-    background: sandybrown;
-    border-radius: 15px 0 0;
-    padding: 10px 0;
+    font-weight: bold !important;
+    color: #7b7b7b !important;
+    background: white !important;
+    padding: 10px 0 !important;
+    border-bottom: 2px solid grey !important;
   }
-  p:not(:first-child) {
-    color: darkgreen;
-    font-size: 13px;
-    font-weight: bolder;
-    border-bottom: 1px solid sandybrown;
-  }
-}
 
-.chat-messages-section {
-  border-left: 1px solid sandybrown;
-  background: white;
-  border-radius: 0 20px 0 0;
-  padding: 0;
-  p {
-    margin: 0;
-    font-weight: bolder;
+  .chat-online-users-section {
+    border-right: 1px solid grey;
+    background: aliceblue;
+    padding: 0;
+    p {
+      margin: 0;
+      color: darkgreen;
+      font-size: 13px;
+      font-weight: bolder;
+      border-bottom: 1px solid grey;
+    }
   }
-  p:not(:first-child) {
-    line-height: 18px;
-  }
-  .room-content-header {
-    color: navajowhite;
-    background: sandybrown;
-    border: none;
-    border-radius: 0 15px 0 0;
-    padding: 10px 0;
-  }
-  div.userMessage, div.currentUserMessage {
-    background: greenyellow;
-    width: 90%;
-    border-radius: 10px;
-    padding: 2px 15px;
-    margin: 5px 5px 0;
-    float: right;
-    .message-info {
-      line-height: 5px;
-      color: black;
-      font-size: 10px;
+  .chat-messages-section {
+    border-left: 1px solid grey;
+    background: #3f9684;
+    padding: 0;
+    p {
+      margin: 0;
+      font-weight: bolder;
+    }
+    p:not(:first-child) {
+      line-height: 18px;
+    }
+    div.userMessage, div.currentUserMessage {
+      background: honeydew;
+      width: 90%;
+      border-radius: 10px;
+      padding: 2px 15px;
+      margin: 5px 5px 0;
+      float: right;
+      .message-info {
+        line-height: 5px;
+        color: black;
+        font-size: 10px;
+        text-align: right;
+      }
+    }
+    div.currentUserMessage {
       text-align: right;
-    }
-  }
-  div.currentUserMessage {
-    text-align: right;
-    float: left;
-    background: deepskyblue;
-    .message-info {
-      text-align: left;
+      float: left;
+      background: #dfece7;
+      .message-info {
+        text-align: left;
+      }
     }
   }
 }
+
 
 .chat-message-zone {
   height: 330px;
@@ -287,7 +274,7 @@ header {
 
 .input-zone {
   height: 70px;
-  border-top: 2px solid sandybrown;
+  border-top: 2px solid grey;
   display: flex;
   textarea {
     margin: 0px;
@@ -296,7 +283,7 @@ header {
     resize: none;
     outline: none;
     border: none;
-    border-right: 2px solid sandybrown;
+    border-right: 2px solid grey;
     color: black;
     font-size: 15px;
     font-weight: bolder;

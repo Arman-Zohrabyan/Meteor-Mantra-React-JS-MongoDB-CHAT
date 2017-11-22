@@ -34,8 +34,13 @@ export default class ChatRoom extends React.Component {
     }
   }
 
-  onChange(e) {
-    this.setState({message: e.target.value});
+  pressEnterOnMessageArea(e) {
+    if(e.charCode === 13) {
+      this.sendMessage();
+      setTimeout( () => {window.document.getElementById('messagearea').value = ""} );
+    } else {
+      this.setState({message: e.target.value});
+    }
   }
 
   render() {
@@ -47,7 +52,7 @@ export default class ChatRoom extends React.Component {
             <div className="col-md-10 col-md-offset-1 window">
               
               <div className="padding-vertical-md">
-                <div className="btn-c btn-100 pull-left btn-close" onClick={() => FlowRouter.go('chat.rooms')}>Back</div>
+                {/*<div className="btn-c btn-100 pull-left btn-close" onClick={() => FlowRouter.go('chat.rooms')}>Back</div>*/}
                 <h4 className="flex-center marginT5B5">Room: {this.props.room.room}</h4>
               </div>
 
@@ -78,7 +83,7 @@ export default class ChatRoom extends React.Component {
                     }
                   </div>
                   <div className="input-zone">
-                    <textarea id='messagearea' placeholder="Write Your Message." onChange={this.onChange.bind(this)} />
+                    <textarea id='messagearea' placeholder="Write Your Message." onKeyPress={this.pressEnterOnMessageArea.bind(this)} />
                     <div className="send-btn flex-center" onClick={this.sendMessage.bind(this)}>Send</div>
                   </div>
                 </div>
