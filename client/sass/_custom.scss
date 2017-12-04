@@ -106,9 +106,6 @@ hr {
     padding-right: 3px;
   }
 }
-.marginT5B5 {
-  margin: 5px 0;
-}
 
 /**//**//**//**//**/
 
@@ -246,18 +243,34 @@ header {
       margin: 5px 5px 0;
       float: right;
       .message-info {
-        line-height: 5px;
-        color: black;
+        line-height: 10px;
+        color: midnightblue;
         font-size: 10px;
         text-align: right;
       }
     }
     div.currentUserMessage {
+      color: darkred;
       text-align: right;
       float: left;
       background: #dfece7;
       .message-info {
         text-align: left;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    margin: 0 -15px 10px;
+    .chat-online-users-section {
+      display: none;
+    }
+    .chat-messages-section {
+      width:100%
+    }
+    div.userMessage, div.currentUserMessage {
+      .message-info {
+        line-height: 8px;
+        font-size: 8px;
       }
     }
   }
@@ -289,40 +302,70 @@ header {
     font-weight: bolder;
     float: left;
   }
+  .send-btn {
+    width: 13%;
+    font-size: 20px;
+    font-weight: bold;
+    color: #444;
+    background: #ccc;
+    cursor: pointer;
+    user-select: none;
+    &:hover {
+      background: #999;
+    }
+  }
+  @media (max-width: 768px) {
+    height: 50px;
+    textarea {
+      height: 48px;
+      width: 80%;
+      font-size: 10px;
+    }
+    .send-btn {
+      font-size: 12px;
+      width: 20%;
+    }
+  }
 }
 textarea::-webkit-input-placeholder {
   display: block;
   text-align: center;
   padding-top: 20px;
+  @media (max-width: 768px) {
+    padding-top: 15px;
+  }
 }
 
 textarea::-moz-input-placeholder {
   display: block;
   text-align: center;
   padding-top: 20px;
+  @media (max-width: 768px) {
+    padding-top: 15px;
+  }
 }
 
 textarea:-moz-input-placeholder {
   display: block;
   text-align: center;
   padding-top: 20px;
+  @media (max-width: 768px) {
+    padding-top: 15px;
+  }
 }
 
 textarea:-ms-input-placeholder {
   display: block;
   text-align: center;
   padding-top: 20px;
+  @media (max-width: 768px) {
+    padding-top: 15px;
+  }
 }
 
-.send-btn {
-  width: 13%;
-  font-size: 20px;
-  font-weight: bold;
-  color: #444;
-  background: #ccc;
-  cursor: pointer;
-  user-select: none;
-  &:hover {
-    background: #999;
+.chat-head-info {
+  margin: 5px 0;
+  @media (max-width: 768px) {
+    margin-top: -6px;
   }
 }

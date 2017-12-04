@@ -1,5 +1,6 @@
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
+import moment from 'moment';
 
 import {Rooms} from '/lib/collections';
 import UserHelpers from '../lib/userHelpers'
@@ -22,7 +23,7 @@ export default function () {
       check(message, String);
       const currentUserName = UserHelpers.getFirstNameByUserId(this.userId);
 
-      Rooms.update( {_id: roomId}, {$push: { messages: {sent: new Date(), by: currentUserName, userId: this.userId, message} }});
+      Rooms.update( {_id: roomId}, {$push: { messages: {sent: moment().format('lll').slice(0, -3), by: currentUserName, userId: this.userId, message} }});
       console.warn('New room successfuly created');
     }
   });

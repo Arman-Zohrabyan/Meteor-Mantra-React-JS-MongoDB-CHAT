@@ -52,20 +52,13 @@ export default class ChatRoom extends React.Component {
             <div className="col-md-10 col-md-offset-1 window">
               
               <div className="padding-vertical-md">
-                {/*<div className="btn-c btn-100 pull-left btn-close" onClick={() => FlowRouter.go('chat.rooms')}>Back</div>*/}
-                <h4 className="flex-center marginT5B5">Room: {this.props.room.room}</h4>
+                <div className="btn-c btn-100 pull-left btn-close" onClick={() => FlowRouter.go('chat.rooms')}>Back</div>
+                <h4 className="flex-center chat-head-info">Room: {this.props.room.room}</h4>
               </div>
 
               <div className="row chat-content">
                 <div className="col-sm-2 col-xs-3 chat-online-users-section">
                   <p className="room-content-header flex-center">Online users</p>
-                  {/*<p className="flex-center">sadads</p>
-                  <p className="flex-center">sdads</p>
-                  <p className="flex-center">sdsdaads</p>
-                  <p className="flex-center">sdadsq</p>
-                  <p className="flex-center">sdadsaaaas</p>
-                  <p className="flex-center">sdadfass</p>
-                  <p className="flex-center">sdadddds</p>*/}
                 </div>
                 <div className="col-sm-10 col-xs-9 chat-messages-section">
                   <p className="room-content-header flex-center">Messages</p>
@@ -76,7 +69,7 @@ export default class ChatRoom extends React.Component {
                         return (
                           <div className={currentUserMessage ? 'currentUserMessage' : 'userMessage'} key={number}>
                             <p>{msg.message}</p>
-                            <p className="message-info">data: {msg.sent.toString()}, by: {msg.by}</p>
+                            <p className="message-info">data: {msg.sent.toString()} | by: {msg.by}</p>
                           </div>
                         );
                       }) : ''
